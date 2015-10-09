@@ -25,43 +25,95 @@ pathappend () {
     export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
 }
 
+pathprepend "/usr/local/sbin"
+pathprepend "/usr/local/bin"
+
 # home brew
-alias brew='PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin brew'
+alias brew='PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin brew'
 
-# phpbrew
-if [ -f "$HOME/.phpbrew/bashrc" ] ; then
-    source $HOME/.phpbrew/bashrc
-fi
-
-# npm from homebrew
-pathprepend "/usr/local/share/npm/bin"
 
 # rbenv
+export RBENV_ROOT="$HOME/.rbenv"
+pathprepend "$RBENV_ROOT/bin"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+
 # pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+pathprepend "$PYENV_ROOT/bin"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#export CFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
 
-# ~/apps
-export ANT_HOME="${HOME}/apps/apache-ant"
-export M2_HOME="${HOME}/apps/apache-maven"
 
-pathprepend "${M2_HOME}/bin"
-pathprepend "${ANT_HOME}/bin"
+# nodenv
+export NODENV_ROOT="$HOME/.nodenv"
+pathprepend "$NODENV_ROOT/bin"
+if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+
+
+# jenv
+pathprepend "$HOME/.jenv/bin"
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 
 # go path
-export GOPATH="${HOME}/.gocode"
+export GOPATH="$HOME/.gocode"
 
 
-# ~/bin
-pathprepend "${HOME}/bin"
+# ~/apps
+# export ANT_HOME="$HOME/apps/apache-ant"
+# pathprepend "$ANT_HOME/bin"
+#
+# export M2_HOME="$HOME/apps/apache-maven"
+# pathprepend "$M2_HOME/bin"
+#
+# export SCALA_HOME="$HOME/apps/scala"
+# pathprepend "$SCALA_HOME/bin"
+
+
+# ~/bin is always prepended
+pathprepend "$HOME/bin"
+
+
+# pip should only run if there is a virtualenv currently activated
+# cache pip-installed packages to avoid re-downloading
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_DOWNLOAD_CACHE="$HOME/.pip/cache"
+syspip() {
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+
+# GPG always wants to know what TTY it's running on.
+export GPG_TTY=`tty`
+
+
+# CocoaPods
+# alias pod='RBENV_VERSION=2.1.5 pod'
+# openx() {
+#     if test -n "$(find . -maxdepth 1 -name '*.xcworkspace' -print -quit)"
+#     then
+#         echo "Opening workspace"
+#         open *.xcworkspace
+#         return
+#     else
+#         if test -n "$(find . -maxdepth 1 -name '*.xcodeproj' -print -quit)"
+#         then
+#             echo "Opening project"
+#             open *.xcodeproj
+#             return
+#         else
+#             echo "Nothing found"
+#         fi
+#     fi
+# }
+
 
 # Now to clean up
 unset pathremove pathprepend pathappend
 
-# GPG always wants to know what TTY it's running on. 
-export GPG_TTY=`tty`
+# If not running interactively, set path only
+[ -z "$PS1" ] && return
 
 
 # Editor
@@ -77,25 +129,45 @@ if [[ ${EUID} == 0 ]] ; then
     PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
 else
     #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
-    PS1='\[\033[01;32m\]π\[\033[01;34m\] \W \$\[\033[00m\] '
+    PS1='\[\033[01;32m\]\h π\[\033[01;34m\] \W \$\[\033[00m\] '
 fi
 
 alias ls='ls -G'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
 # bash_completion
-for completion in "/usr/local/etc/bash_completion.d/*-completion.bash"
-do
-    source $completion
-done
+if [ -x "/usr/local/etc/bash_completion.d/" ]; then
+    for completion in "/usr/local/etc/bash_completion.d/*-completion.bash"
+    do
+        source $completion
+    done
+fi
 
 # ve
 complete -o bashdefault -o default -o nospace -c ve
+
 
 # git-ps1
 if [ -x "$HOME/bin/git-ps1.sh" ]; then
     PS1="$PS1\$($( cat $HOME/bin/git-ps1.sh ))"
 fi
+
+
+# colors in manual pages
+man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
 
