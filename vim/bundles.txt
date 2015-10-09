@@ -1,0 +1,16 @@
+https://github.com/altercation/vim-colors-solarized.git
+https://github.com/chriskempson/vim-tomorrow-theme.git
+https://github.com/bling/vim-airline.git
+https://github.com/kien/ctrlp.vim.git
+https://github.com/scrooloose/nerdtree.git
+https://github.com/airblade/vim-gitgutter.git
+https://github.com/plasticboy/vim-markdown.git
+https://github.com/dagwieers/asciidoc-vim.git
+https://github.com/kchmck/vim-coffee-script.git
+https://github.com/jnwhiteh/vim-golang.git
+https://github.com/tpope/vim-haml.git
+https://github.com/groenewege/vim-less.git
+https://github.com/evanmiller/nginx-vim-syntax.git
+https://github.com/Glench/Vim-Jinja2-Syntax.git
+https://github.com/tpope/vim-cucumber.git
+https://github.com/smerrill/vcl-vim-plugin.git

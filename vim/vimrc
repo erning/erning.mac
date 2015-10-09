@@ -1,45 +1,28 @@
 set nocompatible
 
 call pathogen#infect()
-call pathogen#helptags()
+" call pathogen#helptags()
+
+"
+" common settings
+"
+set modeline
+set modelines=5
+set paste
 
 filetype plugin on
 filetype indent on
 
-" encoding
+" default encoding
 set encoding=utf8
 set ffs=unix,dos,mac
 
-" files
+" no backup files
 set nobackup
 set nowb
 set noswapfile
 
-" syntax highlight color
-syntax on
-
-" color schema
-if has("gui_running")
-    set guioptions=-t
-    set background=light
-    color solarized
-    set guifont=Menlo:h16
-    "set guifont=Anonymous\ Pro:h16
-    "set guioptions-=T
-    map <C-X><C-L> :set background=light<CR> :color solarized<CR>
-    map <C-X><C-D> :set background=dark<CR> :color peaksea<CR>
-else
-    set background=light
-    color ron
-endif
-
-" incremental search, <C-H> to toggle search highlight
-set incsearch
-map <silent><C-H> :set hls!<CR>
-set ignorecase
-set smartcase
-
-" 4 spaces as tab
+" by default we use 4 spaces as tab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -49,92 +32,102 @@ set smarttab
 " makefiles always use tab
 autocmd FileType make setlocal noexpandtab
 
-" strip trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-nnoremap <leader>s :call <SID>StripTrailingWhitespaces()<CR>
-autocmd BufWritePre *.py,*.js,*.css :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
-
-
-" indent
+" auto and smart indent, wrap long line
 set autoindent
 set smartindent
 set wrap
 
-" line number
+" incremental search, ignore case
+set incsearch
+set ignorecase
+set smartcase
+
+" status
+set laststatus=2
+
+
+"
+" syntax hightlight and color scheme
+"
+syntax on
+
+if has('gui_running')
+"    set background=light
+"   colorscheme solarized
+    set background=dark
+    colorscheme Tomorrow-Night-Bright
+    set guifont=Menlo:h14
+else
+    set background=dark
+    colorscheme Tomorrow-Night-Bright
+endif
+
+" show line number
 set nu
-map <C-N><C-N> :set nu!<CR>
 
-" invisible character
-nmap <leader>l :set list!<CR>
-set listchars=tab:▸-,eol:¬
-
-" Format the statusline
-if has("gui_running")
-    set laststatus=2
-    set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-    function! CurDir()
-        let curdir = substitute(getcwd(), '^/Users/erning', "~", "g")
-        return curdir
-    endfunction
-endif
-
-" Marked.app
-:nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
-
-
-" InputMethod problem
-set noimd
-if has("gui_running")
-    set imdisable
-    "    set imactivatekey=D-space
-    inoremap <ESC> <ESC>:set iminsert=1<CR>
-endif
-
-" identation emulate
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
-
-" Relative number {n}j {n}k
+" relative number {n}j {n}k
 set relativenumber
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-function! NumberToggle()
-    set number
-    set relativenumber!
-endfunc
-"nnoremap <C-n><C-r> :call NumberToggle()<cr>
-map <C-n><C-r> :call NumberToggle()<cr>
-
-"
-set scrolloff=7
-
-"
+" cursor
 if has("gui_running")
     set cursorline
     set cursorcolumn
 endif
 
+" invisible character
+set listchars=tab:▸-,eol:¬
+
+" scrolling margin
+set scrolloff=7
+
+
+"
+" mappings
+"
+
+" toggle nerdtree
+nmap <C-x><C-f> :NERDTreeToggle<CR>
+
+" toggle matches
+nmap <C-x><C-m> :set hls!<CR>
+
+" toggle invisible character
+nmap <C-x><C-i> :set list!<CR>
+
+" toggle relative number
+nmap <C-x><C-n> :set relativenumber!<CR>
+
+" emacs C-a, C-e
+nmap <C-a> 0
+imap <C-a> <ESC>0i
+nmap <C-e> $
+imap <C-e> <ESC>$i
+
+" identation emulate
+vmap << <gv
+vmap >> >gv
+
+" disable arraw keys
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
 
 " w!! write as root
 cmap w!! %!sudo tee > /dev/null %
 
+
 "
+" others
+"
+
+let g:vim_markdown_folding_disabled=1
 set t_ti= t_te=
+
 
