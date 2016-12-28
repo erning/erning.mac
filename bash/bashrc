@@ -30,6 +30,7 @@ pathprepend "/usr/local/bin"
 
 # home brew
 alias brew='PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin brew'
+export HOMEBREW_NO_ANALYTICS=1
 
 
 # rbenv
@@ -52,12 +53,13 @@ if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
 
 # jenv
-pathprepend "$HOME/.jenv/bin"
-if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+# pathprepend "$HOME/.jenv/bin"
+# if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 
 # go path
 export GOPATH="$HOME/.gocode"
+pathprepend "$GOPATH/bin"
 
 
 # ~/apps
@@ -89,7 +91,7 @@ export GPG_TTY=`tty`
 
 
 # CocoaPods
-# alias pod='RBENV_VERSION=2.1.5 pod'
+alias pod='RBENV_VERSION=2.3.1 pod'
 # openx() {
 #     if test -n "$(find . -maxdepth 1 -name '*.xcworkspace' -print -quit)"
 #     then
