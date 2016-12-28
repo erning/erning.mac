@@ -1,0 +1,59 @@
+KeepAlive yes
+ServerAliveInterval 60
+
+PubkeyAcceptedKeyTypes=+ssh-dss
+NoHostAuthenticationForLocalhost yes
+
+Host *
+#ControlPath ~/.ssh/connections/%r_%h_%p
+
+Host alcohol
+    HostName alcohol.swanpan.com
+    ForwardAgent yes
+    User erning
+
+Host alcohol.local
+    ForwardAgent yes
+    User erning
+
+Host soda
+    HostName soda.swanpan.com
+    ForwardAgent yes
+    User erning
+
+Host soda.local
+    ForwardAgent yes
+    User erning
+
+Host iphone
+    HostName 127.0.0.1
+    Port 2022
+    User root
+
+# Host vagrant
+#     HostName 127.0.0.1
+#     Port 2222
+#     StrictHostKeychecking no
+#     UserKnownHostsFile /dev/null
+
+# Host *.ops.gaoshou.me
+#     User root
+
+# Host h????
+#     HostName %h.ops.gaoshou.me
+#     User gsbot
+
+# Host n????
+#     HostName %h.ops.gaoshou.me
+#     User gsbot
+
+# Host tunnel
+#     ControlMaster auto
+#     HostName xxx.xxx.xxx.xxx
+#     User xxx
+ 
+# Host target
+#     ProxyCommand ssh tunnel  -W %h:%p
+#     StrictHostKeychecking no
+#     UserKnownHostsFile /dev/null
+
