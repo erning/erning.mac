@@ -8,8 +8,8 @@ clean:
 
 install:
 	PWD=`pwd`
-	ln -s $(PWD)/bash_profile $(HOME)/.bash_profile
-	ln -s $(PWD)/bashrc $(HOME)/.bashrc
+	ln -is $(PWD)/bash_profile $(HOME)/.bash_profile
+	ln -is $(PWD)/bashrc $(HOME)/.bashrc
 
 .PHONY: clean install
 
