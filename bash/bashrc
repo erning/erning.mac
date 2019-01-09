@@ -16,7 +16,7 @@ export GPG_TTY=`tty`
 
 
 # CocoaPods
-alias pod='RBENV_VERSION=2.3.1 pod'
+# alias pod='RBENV_VERSION=2.3.1 pod'
 
 
 # Editor
