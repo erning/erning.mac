@@ -36,7 +36,7 @@ alias fgrep 'fgrep --color=auto'
 alias egrep 'egrep --color=auto'
 alias rm 'rm -i'
 alias mv 'mv -i'
-alias cp 'cp -i
+alias cp 'cp -i'
 
 # 
 function man
