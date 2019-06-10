@@ -8,7 +8,14 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" color scheme
+Plugin 'dracula/vim'
+Plugin 'morhetz/gruvbox'
+
+" syntax highlight
 Plugin 'sheerun/vim-polyglot'
+
+" editorconfig
 Plugin 'editorconfig/editorconfig-vim'
 
 " All of your Plugins must be added before the following line
@@ -16,7 +23,18 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 """
-syntax on
-color ron
-set shell=/bin/bash
 set guifont=PragmataPro\ Liga:h18
+
+" scheme
+syntax on
+color gruvbox
+set background=dark
+
+" search
+set incsearch
+set ignorecase
+set smartcase
+
+" fish shell
+set shell=/bin/bash
+
