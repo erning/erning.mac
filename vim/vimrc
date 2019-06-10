@@ -1,133 +1,22 @@
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-call pathogen#infect()
-" call pathogen#helptags()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-"
-" common settings
-"
-set modeline
-set modelines=5
-set paste
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-filetype plugin on
-filetype indent on
+Plugin 'sheerun/vim-polyglot'
+Plugin 'editorconfig/editorconfig-vim'
 
-" default encoding
-set encoding=utf8
-set ffs=unix,dos,mac
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-" no backup files
-set nobackup
-set nowb
-set noswapfile
-
-" by default we use 4 spaces as tab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set smarttab
-
-" makefiles always use tab
-autocmd FileType make setlocal noexpandtab
-
-" auto and smart indent, wrap long line
-set autoindent
-set smartindent
-set wrap
-
-" incremental search, ignore case
-set incsearch
-set ignorecase
-set smartcase
-
-" status
-set laststatus=2
-
-
-"
-" syntax hightlight and color scheme
-"
+"""
 syntax on
-
-if has('gui_running')
-"    set background=light
-"   colorscheme solarized
-    set background=dark
-    colorscheme Tomorrow-Night-Bright
-    set guifont=Menlo:h14
-else
-    set background=dark
-    colorscheme Tomorrow-Night-Bright
-endif
-
-" show line number
-set nu
-
-" relative number {n}j {n}k
-set relativenumber
-au FocusLost * :set number
-au FocusGained * :set relativenumber
-
-" cursor
-if has("gui_running")
-    set cursorline
-    set cursorcolumn
-endif
-
-" invisible character
-set listchars=tab:▸-,eol:¬
-
-" scrolling margin
-set scrolloff=7
-
-
-"
-" mappings
-"
-
-" toggle nerdtree
-nmap <C-x><C-f> :NERDTreeToggle<CR>
-
-" toggle matches
-nmap <C-x><C-m> :set hls!<CR>
-
-" toggle invisible character
-nmap <C-x><C-i> :set list!<CR>
-
-" toggle relative number
-nmap <C-x><C-n> :set relativenumber!<CR>
-
-" emacs C-a, C-e
-nmap <C-a> 0
-imap <C-a> <ESC>0i
-nmap <C-e> $
-imap <C-e> <ESC>$i
-
-" identation emulate
-vmap << <gv
-vmap >> >gv
-
-" disable arraw keys
-inoremap  <Up>     <NOP>
-inoremap  <Down>   <NOP>
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-noremap   <Up>     <NOP>
-noremap   <Down>   <NOP>
-noremap   <Left>   <NOP>
-noremap   <Right>  <NOP>
-
-" w!! write as root
-cmap w!! %!sudo tee > /dev/null %
-
-
-"
-" others
-"
-
-let g:vim_markdown_folding_disabled=1
-set t_ti= t_te=
-
-
+color ron
+set shell=/bin/bash
+set guifont=PragmataPro\ Liga:h18
