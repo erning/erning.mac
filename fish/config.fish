@@ -1,11 +1,11 @@
 
+# prompt
+set SPACEFISH_CHAR_SYMBOL π
+set SPACEFISH_PROMPT_ORDER user dir host git line_sep exit_code char
+
 if not status --is-login
     exit
 end
-
-# prompt
-# set -x SPACEFISH_USER_SHOW always
-set -x SPACEFISH_CHAR_SYMBOL π
 
 # path
 set -x fish_user_paths /usr/local/bin /usr/local/sbin
@@ -28,6 +28,10 @@ set -x fish_user_paths "$THEOS/bin" $fish_user_paths
 # ~/bin
 set -x fish_user_paths "$HOME/bin" $fish_user_paths
 
+# vi -> Simple, vim -> SpaceVIM
+
+alias vim 'vim -u ~/.SpaceVim/vimrc'
+alias mvim 'mvim -u ~/.SpaceVim/vimrc'
 
 #
 alias ll 'ls -lh'
