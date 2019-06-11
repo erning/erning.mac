@@ -24,6 +24,7 @@ filetype plugin indent on    " required
 
 """
 set guifont=PragmataPro\ Liga:h18
+set number
 
 " scheme
 syntax on
@@ -34,7 +35,4 @@ set background=dark
 set incsearch
 set ignorecase
 set smartcase
-
-" fish shell
-set shell=/bin/bash
 
