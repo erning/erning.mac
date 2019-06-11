@@ -19,6 +19,12 @@ end
 alias brew "env PATH="(string join ':' $fish_user_paths)" brew"
 set -x HOMEBREW_NO_ANALYTICS 1
 
+
+# pip should only run if there is a virtualenv currently activated
+# cache pip-installed packages to avoid re-downloading
+set -x PIP_REQUIRE_VIRTUALENV true
+set -x PIP_DOWNLOAD_CACHE "$HOME/.cache/pip"
+
 # rust
 set -p fish_user_paths "$HOME/.cargo/bin"
 
