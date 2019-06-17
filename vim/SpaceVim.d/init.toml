@@ -13,7 +13,7 @@
     colorscheme = "gruvbox"
     colorscheme_bg = "dark"
 
-    enable_guicolors = true
+    enable_guicolors = false
 
     statusline_separator = "arrow"
     statusline_inactive_separator = "arrow"
