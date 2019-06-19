@@ -11,8 +11,8 @@ end
 set fish_user_paths /usr/local/bin /usr/local/sbin /usr/bin /usr/sbin /bin /sbin
 if test (uname -s) = Linux
     set -p fish_user_paths \
-           /home/linuxbrew/.linuxbrew/bin \
-           /home/linuxbrew/.linuxbrew/sbin
+        /home/linuxbrew/.linuxbrew/bin \
+        /home/linuxbrew/.linuxbrew/sbin
 end
 
 # homebrew
@@ -58,12 +58,13 @@ alias cp 'cp -i'
 # colorful manual pages
 function man
     env \
-    LESS_TERMCAP_mb=(printf "\e[1;31m") \
-    LESS_TERMCAP_md=(printf "\e[1;31m") \
-    LESS_TERMCAP_me=(printf "\e[0m") \
-    LESS_TERMCAP_se=(printf "\e[0m") \
-    LESS_TERMCAP_so=(printf "\e[1;44;33m") \
-    LESS_TERMCAP_ue=(printf "\e[0m") \
-    LESS_TERMCAP_us=(printf "\e[1;32m") \
-    man $argv
+        LESS_TERMCAP_mb=(printf "\e[1;31m") \
+        LESS_TERMCAP_md=(printf "\e[1;31m") \
+        LESS_TERMCAP_me=(printf "\e[0m") \
+        LESS_TERMCAP_se=(printf "\e[0m") \
+        LESS_TERMCAP_so=(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=(printf "\e[0m") \
+        LESS_TERMCAP_us=(printf "\e[1;32m") \
+        man $argv
 end
+
